@@ -11,7 +11,7 @@ script:
   - echo 1
 
 after_success:
-  - tar -cvzf --exclude=".*" package-index.tgz .
+  - tar -cvzf --exclude .* package-index.tgz src
   - export SSHPASS=$DEPLOY_PASS
   - sshpass -e scp -v -o stricthostkeychecking=no -P $DEPLOY_PORT package-index.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
   - sshpass -e ssh -v -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy-index.sh
